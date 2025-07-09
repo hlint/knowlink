@@ -1,0 +1,6 @@
+.editor {
+  @apply w-full h-full flex-1;
+  :global(.emojis > li) {
+    @apply box-content;
+  }
+}

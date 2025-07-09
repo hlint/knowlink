@@ -1,0 +1,15 @@
+diff --git a/lib/index.js b/lib/index.js
+index a25110e4e4d7fda24ae9b8bd24ee3db73b600b02..356b6e2e03b31e12136993f2edd1e1d2106c3770 100644
+--- a/lib/index.js
++++ b/lib/index.js
+@@ -40,6 +40,10 @@ const clipboard = $prose((ctx) => {
+         const editable = (_b = (_a = view.props).editable) == null ? void 0 : _b.call(_a, view.state);
+         const { clipboardData } = event;
+         if (!editable || !clipboardData) return false;
++				// If the clipboard contains files, let next plugin handle it
++        if (event.clipboardData?.files?.length) {
++          return false
++        }
+         const currentNode = view.state.selection.$from.node();
+         if (currentNode.type.spec.code) return false;
+         const text = clipboardData.getData("text/plain");

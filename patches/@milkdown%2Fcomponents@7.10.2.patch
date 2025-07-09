@@ -1,0 +1,54 @@
+diff --git a/node_modules/@milkdown/components/.bun-tag-a39e9d66214d8b5a b/.bun-tag-a39e9d66214d8b5a
+new file mode 100644
+index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
+diff --git a/node_modules/@milkdown/components/.bun-tag-d864e0f8ccf0a328 b/.bun-tag-d864e0f8ccf0a328
+new file mode 100644
+index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
+diff --git a/lib/code-block/index.js b/lib/code-block/index.js
+index 9fbbe1208452462e4a789d68d955c4752d5bbcc6..0dde0acfaaa5b4e0e05a1c296c776b7827ece50c 100644
+--- a/lib/code-block/index.js
++++ b/lib/code-block/index.js
+@@ -178,10 +178,10 @@ const LanguagePicker = defineComponent({
+       if (!showPicker.value) return [];
+       const all = (_a = getAllLanguages()) != null ? _a : [];
+       const selected = all.find(
+-        (languageInfo) => languageInfo.name.toLowerCase() === language.value.toLowerCase()
++        (languageInfo) => languageInfo.name.toLowerCase() === language.value?.toLowerCase()
+       );
+       const filtered = all.filter((languageInfo) => {
+-        const currentValue = filter.value.toLowerCase();
++        const currentValue = filter.value?.toLowerCase();
+         return (languageInfo.name.toLowerCase().includes(currentValue) || languageInfo.alias.some(
+           (alias) => alias.toLowerCase().includes(currentValue)
+         )) && languageInfo !== selected;
+@@ -260,7 +260,7 @@ const LanguagePicker = defineComponent({
+             role: "listitem",
+             tabindex: "0",
+             class: "language-list-item",
+-            "aria-selected": languageInfo.name.toLowerCase() === language.value.toLowerCase(),
++            "aria-selected": languageInfo.name.toLowerCase() === language.value?.toLowerCase(),
+             "data-language": languageInfo.name,
+             onClick: () => {
+               setLanguage(languageInfo.name);
+@@ -269,7 +269,7 @@ const LanguagePicker = defineComponent({
+           },
+           config.renderLanguage(
+             languageInfo.name,
+-            languageInfo.name.toLowerCase() === language.value.toLowerCase()
++            languageInfo.name.toLowerCase() === language.value?.toLowerCase()
+           )
+         ))
+       )) : null));
+diff --git a/lib/link-tooltip/index.js b/lib/link-tooltip/index.js
+index 92bb4e1b65c8952cb5fbdfa4992dccc64219221d..98424603ef9df98951a73d701a14073e662b3998 100644
+--- a/lib/link-tooltip/index.js
++++ b/lib/link-tooltip/index.js
+@@ -461,7 +461,7 @@ const PreviewLink = defineComponent({
+       }
+     };
+     return () => {
+-      return /* @__PURE__ */ h("div", { class: "link-preview", onPointerdown: onClickPreview }, /* @__PURE__ */ h(Icon, { class: "link-icon", icon: config.value.linkIcon() }), /* @__PURE__ */ h("a", { href: src.value, target: "_blank", class: "link-display" }, src.value), /* @__PURE__ */ h(
++      return /* @__PURE__ */ h("div", { class: "link-preview" }, /* @__PURE__ */ h(Icon, { class: "link-icon", icon: config.value.linkIcon(), onPointerdown: onClickPreview }), /* @__PURE__ */ h("a", { href: src.value, target: "_blank", class: "link-display" }, src.value), /* @__PURE__ */ h(
+         Icon,
+         {
+           class: "button link-edit-button",

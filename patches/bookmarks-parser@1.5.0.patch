@@ -1,0 +1,19 @@
+diff --git a/lib/bookmarks-parser.js b/lib/bookmarks-parser.js
+index c7be3c020c484d0ac7818055e5487b7f9abb589f..ed4c8ab55c25d49263f2c9fa5d8d17ad7ab0ebb8 100644
+--- a/lib/bookmarks-parser.js
++++ b/lib/bookmarks-parser.js
+@@ -4,13 +4,8 @@ var
+   async = require("async");
+ 
+ // load parsers
+-var files = fs.readdirSync(__dirname + "/parsers");
+-files.forEach(function(f) {
+-  if(!/^netscape\.js$/i.test(f)) {
+-    parsers.push(require("./parsers/" + f));
+-  }
+-});
+ parsers.push(require("./parsers/netscape.js"));
++parsers.push(require("./parsers/pocket.js"));
+ 
+ module.exports = exports = function(html, callback) {
+   async.eachSeries(parsers, function(parser, next) {

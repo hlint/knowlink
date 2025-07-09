@@ -1,0 +1,93 @@
+diff --git a/node_modules/@milkdown/crepe/.bun-tag-7812a9b8eefe67f2 b/.bun-tag-7812a9b8eefe67f2
+new file mode 100644
+index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
+diff --git a/lib/esm/index-BDZ_pnSv.js b/lib/esm/index-BDZ_pnSv.js
+index ab4f41d8d349702dda6bf936b09d5f8fc816ec98..ffbbf00dc838d77cb897fcd9c7adcbf31916a83b 100644
+--- a/lib/esm/index-BDZ_pnSv.js
++++ b/lib/esm/index-BDZ_pnSv.js
+@@ -263,7 +263,8 @@ const defineFeature = (editor, config) => {
+     ctx.update(codeBlockConfig.key, (prev) => ({
+       ...prev,
+       renderPreview: (language, content) => {
+-        if (language.toLowerCase() === "latex" && content.length > 0) {
++        // fix: language could be null
++        if (language?.toLowerCase() === "latex" && content.length > 0) {
+           return renderLatex(content, config == null ? void 0 : config.katexOptions);
+         }
+         const renderPreview = prev.renderPreview;
+diff --git a/lib/esm/index-CM4urRY9.js b/lib/esm/index-CM4urRY9.js
+index bcb4542e7b95bd2b72458f8bfaaf8b2aba07badf..093b99bbba8146280f89384e57e7d7d5c96b58dc 100644
+--- a/lib/esm/index-CM4urRY9.js
++++ b/lib/esm/index-CM4urRY9.js
+@@ -448,39 +448,6 @@ function getGroups(filter, config, ctx) {
+       });
+       command(state, dispatch);
+     }
+-  }).addItem("h4", {
+-    label: (_n = config == null ? void 0 : config.slashMenuH4Label) != null ? _n : "Heading 4",
+-    icon: (_p = (_o = config == null ? void 0 : config.slashMenuH4Icon) == null ? void 0 : _o.call(config)) != null ? _p : h4Icon,
+-    onRun: (ctx2) => {
+-      const view = ctx2.get(editorViewCtx);
+-      const { dispatch, state } = view;
+-      const command = clearContentAndSetBlockType(headingSchema.type(ctx2), {
+-        level: 4
+-      });
+-      command(state, dispatch);
+-    }
+-  }).addItem("h5", {
+-    label: (_q = config == null ? void 0 : config.slashMenuH5Label) != null ? _q : "Heading 5",
+-    icon: (_s = (_r = config == null ? void 0 : config.slashMenuH5Icon) == null ? void 0 : _r.call(config)) != null ? _s : h5Icon,
+-    onRun: (ctx2) => {
+-      const view = ctx2.get(editorViewCtx);
+-      const { dispatch, state } = view;
+-      const command = clearContentAndSetBlockType(headingSchema.type(ctx2), {
+-        level: 5
+-      });
+-      command(state, dispatch);
+-    }
+-  }).addItem("h6", {
+-    label: (_t = config == null ? void 0 : config.slashMenuH6Label) != null ? _t : "Heading 6",
+-    icon: (_v = (_u = config == null ? void 0 : config.slashMenuH6Icon) == null ? void 0 : _u.call(config)) != null ? _v : h6Icon,
+-    onRun: (ctx2) => {
+-      const view = ctx2.get(editorViewCtx);
+-      const { dispatch, state } = view;
+-      const command = clearContentAndSetBlockType(headingSchema.type(ctx2), {
+-        level: 6
+-      });
+-      command(state, dispatch);
+-    }
+   }).addItem("quote", {
+     label: (_w = config == null ? void 0 : config.slashMenuQuoteLabel) != null ? _w : "Quote",
+     icon: (_y = (_x = config == null ? void 0 : config.slashMenuQuoteIcon) == null ? void 0 : _x.call(config)) != null ? _y : quoteIcon,
+@@ -589,20 +556,17 @@ function getGroups(filter, config, ctx) {
+       }
+     });
+   }
+-  if (isLatexEnabled) {
+-    advancedGroup.addItem("math", {
+-      label: (_W = config == null ? void 0 : config.slashMenuMathLabel) != null ? _W : "Math",
+-      icon: (_Y = (_X = config == null ? void 0 : config.slashMenuMathIcon) == null ? void 0 : _X.call(config)) != null ? _Y : functionsIcon,
+-      onRun: (ctx2) => {
+-        const view = ctx2.get(editorViewCtx);
+-        const { dispatch, state } = view;
+-        const command = clearContentAndAddBlockType(codeBlockSchema.type(ctx2), {
+-          language: "LaTex"
+-        });
+-        command(state, dispatch);
+-      }
+-    });
+-  }
++
++	// Hack to implement the upload files feature
++	advancedGroup.addItem("upload", {
++		label: (config.slashMenuUploadFilesLabel),
++		icon: (config.slashMenuUploadFilesIcon),
++		onRun: (ctx2) => {
++			const view = ctx2.get(editorViewCtx);
++			config.callUploadFiles(view);
++		}
++	});
++
+   (_Z = config == null ? void 0 : config.buildMenu) == null ? void 0 : _Z.call(config, groupBuilder);
+   let groups = groupBuilder.build();
+   if (filter) {

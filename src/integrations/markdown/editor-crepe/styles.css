@@ -1,0 +1,147 @@
+@reference "../../../app/globals.css";
+
+.custom-crepe-editor {
+  .milkdown {
+    .ProseMirror {
+      @apply text-sm sm:text-base;
+      h1 {
+        margin-top: 0;
+        margin-bottom: 0.8em;
+        font-size: 2.14286em;
+        line-height: 1.2;
+      }
+      h2 {
+        margin-top: 1.6em;
+        margin-bottom: 0.8em;
+        font-size: 1.42857em;
+        line-height: 1.4;
+      }
+      h3 {
+        margin-top: 1.55556em;
+        margin-bottom: 0.444444em;
+        font-size: 1.28571em;
+        line-height: 1.55556;
+      }
+      h4 {
+        margin-top: 1.42857em;
+        margin-bottom: 0.571429em;
+        line-height: 1.42857;
+      }
+      h5 {
+        font-size: inherit;
+        margin-top: 0;
+      }
+      h6 {
+        margin-top: 0;
+        font-size: inherit;
+        font-weight: inherit;
+      }
+      p {
+        font-size: inherit;
+      }
+    }
+  }
+}
+.custom-crepe-editor {
+  .milkdown {
+    --crepe-font-title: inherit;
+    --crepe-font-default: inherit;
+    min-height: 100%;
+    .milkdown-code-block {
+      @apply bg-foreground rounded-md pb-8;
+      .cm-editor {
+        @apply bg-foreground;
+      }
+      .cm-gutters {
+        @apply bg-foreground;
+      }
+      .language-list-item {
+        gap: 8px;
+        padding: 2px 16px;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 16px;
+      }
+    }
+    .ProseMirror {
+      @apply py-2 sm:py-4 px-1 sm:px-20;
+    }
+    img {
+      @apply rounded-md;
+    }
+  }
+  .upload-widget {
+    @apply rounded-md border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden absolute z-10;
+    @apply border-transparent bg-primary text-primary-foreground [a&]:hover:bg-primary/90;
+  }
+
+  .milkdown-slash-menu .tab-group ul li {
+    font-weight: 400;
+  }
+  .milkdown-slash-menu .menu-groups .menu-group {
+    h6 {
+      font-weight: 500;
+      padding: 10px 6px;
+    }
+    li {
+      gap: 8px;
+      min-width: 220px;
+      padding: 8px 4px;
+      & > span {
+        font-weight: 500;
+      }
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+
+  .cm-editor {
+    font-size: 14px;
+  }
+  .milkdown {
+    --crepe-color-background: transparent;
+    --crepe-color-on-background: #1b1c1d;
+    --crepe-color-surface: var(--popover);
+    --crepe-color-surface-low: #f2f3fa;
+    --crepe-color-on-surface: #191c20;
+    --crepe-color-on-surface-variant: #43474e;
+    --crepe-color-outline: #73777f;
+    --crepe-color-primary: #37618e;
+    --crepe-color-secondary: #d7e3f8;
+    --crepe-color-on-secondary: #101c2b;
+    --crepe-color-inverse: #2e3135;
+    --crepe-color-on-inverse: #eff0f7;
+    --crepe-color-inline-code: #ba1a1a;
+    --crepe-color-error: #ba1a1a;
+    --crepe-color-hover: #eceef4;
+    --crepe-color-selected: #e1e2e8;
+    --crepe-color-inline-area: #d8dae000;
+    --crepe-shadow-1: 0px 1px 3px 1px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px
+      rgba(0, 0, 0, 0.3);
+    --crepe-shadow-2: 0px 2px 6px 2px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px
+      rgba(0, 0, 0, 0.3);
+  }
+}
+
+.dark .custom-crepe-editor {
+  .milkdown {
+    --crepe-color-on-background: #ececec;
+    --crepe-color-surface: #111418;
+    --crepe-color-surface-low: #191c20;
+    --crepe-color-on-surface: #e1e2e8;
+    --crepe-color-on-surface-variant: #c3c6cf;
+    --crepe-color-outline: #c4d1ec;
+    --crepe-color-primary: #a1c9fd;
+    --crepe-color-secondary: #3c4858;
+    --crepe-color-on-secondary: #d7e3f8;
+    --crepe-color-inverse: #e1e2e8;
+    --crepe-color-on-inverse: #2e3135;
+    --crepe-color-inline-code: #ffb4ab;
+    --crepe-color-error: #ffb4ab;
+    --crepe-color-hover: #1d2024;
+    --crepe-color-selected: #32353a;
+    --crepe-color-inline-area: #111418;
+  }
+}

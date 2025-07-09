@@ -1,0 +1,7 @@
+.wrapper {
+  pre {
+    line-height: inherit !important;
+    font-size: inherit;
+    word-break: break-all;
+  }
+}

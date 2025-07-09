@@ -1,0 +1,22 @@
+{
+  "name": "standalone",
+  "private": true,
+  "scripts": {
+    "start": "bun prisma:push && bun bootstrap && bun app",
+    "bootstrap": "bun ./scripts/bootstrap.ts",
+    "prisma:push": "prisma db push --accept-data-loss",
+    "app": "env-cmd -f ./runtime/secret.env -- bun server.js"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "env-cmd": "^10.1.0",
+    "fs-extra": "^11.3.0",
+    "nanoid": "^5.1.5",
+    "prisma": "^6.10.1"
+  }
+}

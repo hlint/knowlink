@@ -1,0 +1,103 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  // Imports from `@prisma/client` will be automatically forwarded to `.prisma/client`
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:../runtime/sqlite.db"
+}
+
+model Category {
+  id          String        @id @default(uuid())
+  name        String        @default("")
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  Subcategory Subcategory[]
+}
+
+model Subcategory {
+  id         String   @id @default(uuid())
+  name       String   @default("")
+  categoryId String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  category   Category @relation(fields: [categoryId], references: [id])
+  Note       Note[]
+}
+
+model Note {
+  id            String        @id @default(uuid())
+  title         String        @default("")
+  content       String        @default("")
+  icon          String        @default("")
+  link          String        @default("")
+  pending       Boolean       @default(false)
+  viewedCount   Int           @default(0)
+  confidential  Boolean       @default(false)
+  deleted       Boolean       @default(false)
+  deletedAt     DateTime?
+  subcategoryId String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  subcategory   Subcategory?  @relation(fields: [subcategoryId], references: [id])
+  versions      NoteVersion[]
+}
+
+model NoteVersion {
+  id        String   @id @default(uuid())
+  noteId    String
+  version   Int
+  message   String   @default("")
+  content   String
+  createdAt DateTime @default(now())
+
+  note Note @relation(fields: [noteId], references: [id], onDelete: Cascade)
+
+  @@index([noteId, createdAt])
+}
+
+model Entry {
+  name      String   @id
+  type      String   @default("")
+  content   String   @default("")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CalendarEvent {
+  id          String   @id @default(uuid())
+  title       String
+  description String   @default("")
+  start       DateTime
+  end         DateTime
+  allDay      Boolean  @default(false)
+  color       String   @default("sky")
+  location    String   @default("")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Illustration {
+  name      String   @id
+  src       String   @default("")
+  pending   Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model LoginHistory {
+  id        String   @id @default(uuid())
+  username  String
+  action    String   @default("login")
+  ip        String   @default("unknown")
+  ua        String   @default("unknown")
+  createdAt DateTime @default(now())
+}
