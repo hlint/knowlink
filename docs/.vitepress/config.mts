@@ -23,7 +23,7 @@ export default defineConfig({
     ],
     footer: {
       message: "Published under MIT License.",
-      copyright: "Copyright © 2025-present Yuri2peter",
+      copyright: "Copyright © 2025-present Hlint",
     },
     search: {
       provider: "local",
@@ -100,10 +100,7 @@ export default defineConfig({
           },
           {
             text: "Support",
-            items: [
-              { text: "Changelog", link: "/changelog" },
-              { text: "Contact Us", link: "/contact" },
-            ],
+            items: [{ text: "Contact Us", link: "/contact" }],
           },
         ],
       },
@@ -169,10 +166,7 @@ export default defineConfig({
           },
           {
             text: "支持文档",
-            items: [
-              { text: "更新日志", link: "/zh/changelog" },
-              { text: "联系我们", link: "/zh/contact" },
-            ],
+            items: [{ text: "联系我们", link: "/zh/contact" }],
           },
         ],
       },
