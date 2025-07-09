@@ -75,4 +75,4 @@ Thanks to the following open-source projects and technologies:
 
 ## License
 
-Knowlink is open-sourced under the MIT License. See the [LICENSE](../LICENSE) file for details.
+Knowlink is open-sourced under the MIT License.

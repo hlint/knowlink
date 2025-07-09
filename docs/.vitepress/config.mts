@@ -2,11 +2,11 @@ import { defineConfig } from "vitepress";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  lang: "zh-CN",
+  lang: "en",
   title: "Knowlink",
   base: "/knowlink",
-  description: "智能、简洁、直观。您的个人AI驱动笔记和书签管理器。",
-  head: [["link", { rel: "icon", href: "/logo.png" }]],
+  head: [["link", { rel: "icon", href: "logo.png" }]],
+  ignoreDeadLinks: true,
   vite: {
     css: {
       postcss: {
@@ -34,6 +34,7 @@ export default defineConfig({
       label: "English",
       lang: "en",
       link: "/",
+      description: "Your personal AI-powered note and bookmark manager.",
       themeConfig: {
         nav: [
           { text: "Home", link: "/" },
@@ -111,6 +112,7 @@ export default defineConfig({
       label: "中文",
       lang: "zh",
       link: "/zh",
+      description: "您的个人AI驱动笔记和书签管理器。",
       themeConfig: {
         nav: [
           { text: "首页", link: "/zh" },

@@ -75,4 +75,4 @@ Knowlink 使用语义化版本号 (Semantic Versioning)：
 
 ## 许可证
 
-Knowlink 基于 MIT 许可证开源，详见 [LICENSE](../LICENSE) 文件。
+Knowlink 基于 MIT 许可证开源。
