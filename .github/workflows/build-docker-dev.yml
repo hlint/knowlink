@@ -8,6 +8,9 @@ on:
 jobs:
   build:
     uses: ./.github/workflows/build-docker-reusable.yml
+    permissions:
+      contents: read
+      packages: write
     secrets:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
