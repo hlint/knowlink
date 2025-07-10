@@ -1,0 +1,66 @@
+name: Reusable Build Docker Image
+
+on:
+  workflow_call:
+    inputs:
+      image_tag:
+        required: false
+        type: string
+        default: ""
+      tag_strategy:
+        required: false
+        type: string
+        default: "simple"
+        description: "Tag strategy: 'simple' for single tag, 'semver' for version-based tags"
+    secrets:
+      DOCKERHUB_USERNAME:
+        required: true
+      DOCKERHUB_TOKEN:
+        required: true
+
+env:
+  REGISTRY: docker.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            ${{ inputs.tag_strategy == 'semver' && 'type=semver,pattern={{version}}' || '' }}
+            ${{ inputs.tag_strategy == 'semver' && 'type=raw,value=latest' || '' }}
+            ${{ inputs.tag_strategy == 'semver' && 'type=sha' || '' }}
+            ${{ inputs.image_tag != '' && format('type=raw,value={0}', inputs.image_tag) || '' }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max 

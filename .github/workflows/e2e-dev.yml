@@ -1,0 +1,17 @@
+name: E2E Tests - Dev Branch
+on:
+  push:
+    branches: [ dev ]
+    paths:
+      - 'src/**'
+      - 'e2e/**'
+  pull_request:
+    branches: [ dev ]
+    paths:
+      - 'src/**'
+      - 'e2e/**'
+  workflow_dispatch: {}
+
+jobs:
+  e2e-tests:
+    uses: ./.github/workflows/e2e-reusable.yml 

@@ -173,12 +173,12 @@ export default function TabServices() {
                       <FormDescription>
                         See more at{" "}
                         <a
-                          href="https://www.knowlink.com/web-clipper/"
+                          href="https://hlint.github.io/knowlink/guide/browser-extension.html"
                           target="_blank"
                           rel="noreferrer"
                           className="underline"
                         >
-                          Knowlink Web Clipper
+                          Web Clipper Guide
                         </a>
                         .
                       </FormDescription>

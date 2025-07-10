@@ -94,6 +94,16 @@ async function seedDatabase() {
       allDay: true,
     },
   });
+
+  // Services
+  await prisma.entry.create({
+    data: {
+      name: "webClipperAccessKey",
+      type: "config",
+      content: crypto.randomUUID(),
+    },
+  });
+
   console.log("Database is seeded");
 }
 

@@ -15,10 +15,10 @@ Knowlink Web Clipper is a powerful browser extension that allows you to easily s
 
 ## Supported Browsers
 
-- ✅ Chrome (Recommended)
+- ✅ Chrome
 - ✅ Firefox
 - ✅ Edge
-- ✅ Safari (Untested)
+- ✅ Safari (partial supported)
 
 ## Installation Guide
 
@@ -28,27 +28,10 @@ Visit the [Knowlink Web Clipper Releases Page](https://github.com/hlint/knowlink
 
 ### 2. Install to Browser
 
-#### Chrome/Edge Installation Steps:
-
-1. Download the extension package and extract to a local folder
-2. Open browser, visit `chrome://extensions/` (Chrome) or `edge://extensions/` (Edge)
-3. Enable "Developer mode" in the top-right corner
-4. Click "Load unpacked extension"
-5. Select the extracted extension folder
-
-#### Firefox Installation Steps:
-
-1. Download the `.xpi` file
-2. Open Firefox, visit `about:addons`
-3. Click the gear icon, select "Install Add-on From File"
-4. Select the downloaded `.xpi` file
-5. Confirm installation
-
-#### Safari Installation Steps:
-
-1. Download the Safari-specific version
-2. Double-click the installer package to install
-3. Enable the extension in Safari preferences
+- [Chrome](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked)
+- [Edge](https://learn.microsoft.com/en-us/microsoft-edge/extensions/getting-started/extension-sideloading)
+- [Firefox](https://extensionworkshop.com/documentation/develop/temporary-installation-in-firefox/)
+- [Safari](https://wxt.dev/guide/essentials/publishing.html#safari)
 
 ### 3. Initial Configuration
 

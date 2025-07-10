@@ -15,10 +15,10 @@ Knowlink Web Clipper 是一款功能强大的浏览器插件，让您能够轻�
 
 ## 支持的浏览器
 
-- ✅ Chrome (推荐)
+- ✅ Chrome
 - ✅ Firefox
 - ✅ Edge
-- ✅ Safari（未测试）
+- ✅ Safari（部分支持）
 
 ## 安装指南
 
@@ -28,27 +28,10 @@ Knowlink Web Clipper 是一款功能强大的浏览器插件，让您能够轻�
 
 ### 2. 安装到浏览器
 
-#### Chrome/Edge 安装步骤：
-
-1. 下载插件压缩包并解压到本地文件夹
-2. 打开浏览器，访问 `chrome://extensions/` (Chrome) 或 `edge://extensions/` (Edge)
-3. 开启右上角的"开发者模式"
-4. 点击"加载已解压的扩展程序"
-5. 选择解压后的插件文件夹
-
-#### Firefox 安装步骤：
-
-1. 下载 `.xpi` 文件
-2. 打开 Firefox，访问 `about:addons`
-3. 点击齿轮图标，选择"从文件安装附加组件"
-4. 选择下载的 `.xpi` 文件
-5. 确认安装
-
-#### Safari 安装步骤：
-
-1. 下载 Safari 专用版本
-2. 双击安装包进行安装
-3. 在 Safari 偏好设置中启用扩展
+- [Chrome](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked)
+- [Edge](https://learn.microsoft.com/en-us/microsoft-edge/extensions/getting-started/extension-sideloading)
+- [Firefox](https://extensionworkshop.com/documentation/develop/temporary-installation-in-firefox/)
+- [Safari](https://wxt.dev/guide/essentials/publishing.html#safari)
 
 ### 3. 初始配置
 
