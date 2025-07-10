@@ -10,6 +10,7 @@ on:
     paths:
       - 'src/**'
       - 'e2e/**'
+  workflow_dispatch: {}
 jobs:
   test:
     timeout-minutes: 60
