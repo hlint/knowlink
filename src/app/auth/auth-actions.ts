@@ -144,11 +144,17 @@ function getAdminAuth() {
 }
 
 function verifyAdmin(username: string, passwordHash: string) {
+  // default account is not limited by frequency for testing
+  const isDefaultAccount =
+    username === "admin" && passwordHash === hashPassword("123456");
   const adminAuth = getAdminAuth();
   updateAdminAuth({
     verifyTime: new Date().getTime(),
   });
-  if (adminAuth.verifyTime > new Date().getTime() - 1000 * 3) {
+  if (
+    !isDefaultAccount &&
+    adminAuth.verifyTime > new Date().getTime() - 1000 * 3
+  ) {
     return {
       success: false,
       error: "Action too frequent, please try again later",

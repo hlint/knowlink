@@ -46,9 +46,7 @@ runtime
 .vscode
 .github
 docs
-
-# docs
-docs
+e2e
 
 # local scripts
 scripts/local_*

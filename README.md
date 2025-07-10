@@ -3,6 +3,7 @@
 [![Deploy Docs](https://github.com/hlint/knowlink/actions/workflows/deploy-docs.yml/badge.svg)](https://github.com/hlint/knowlink/actions/workflows/deploy-docs.yml)
 [![Build Docker Image](https://github.com/hlint/knowlink/actions/workflows/build-docker.yml/badge.svg)](https://github.com/hlint/knowlink/actions/workflows/build-docker.yml)
 ![GitHub Release](https://img.shields.io/github/v/release/hlint/knowlink)
+[![E2E Tests](https://github.com/hlint/knowlink/actions/workflows/e2e.yml/badge.svg)](https://github.com/hlint/knowlink/actions/workflows/e2e.yml)
 
 <br />
 

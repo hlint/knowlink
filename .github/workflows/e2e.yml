@@ -1,0 +1,72 @@
+name: E2E Tests
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - 'src/**'
+      - 'e2e/**'
+  pull_request:
+    branches: [ main, master ]
+    paths:
+      - 'src/**'
+      - 'e2e/**'
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Bun
+      uses: oven-sh/setup-bun@v1
+      with:
+        bun-version: latest
+    
+    - name: Install root dependencies
+      run: bun ci
+      working-directory: ./
+    
+    - name: Build application
+      run: bun run build:default
+      working-directory: ./
+    
+    - name: Start application
+      run: bun run start &
+      working-directory: ./
+    
+    - name: Wait for application to be ready
+      run: |
+        timeout=60
+        while ! curl -f http://localhost:3000 > /dev/null 2>&1; do
+          if [ $timeout -le 0 ]; then
+            echo "Application failed to start within 60 seconds"
+            exit 1
+          fi
+          sleep 2
+          timeout=$((timeout - 2))
+        done
+        echo "Application is ready"
+    
+    - name: Setup Node.js for Playwright
+      uses: actions/setup-node@v4
+      with:
+        node-version: lts/*
+    
+    - name: Install e2e dependencies
+      run: npm ci
+      working-directory: ./e2e
+    
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
+      working-directory: ./e2e
+    
+    - name: Run Playwright tests
+      run: npx playwright test
+      working-directory: ./e2e
+    
+    - uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() }}
+      with:
+        name: playwright-report
+        path: e2e/playwright-report/
+        retention-days: 30
