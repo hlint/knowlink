@@ -59,11 +59,14 @@ You must choose either [call_tools] or [output_content], not both at the same ti
 
 --------------------------------
 
-[Output Requirements]
-- Your output MUST have two parts:
-	1. Your thinking
-	2. Action to execute (in JSON format)
-- Use ${DIVIDER} to separate the two parts
+[CRITICAL OUTPUT REQUIREMENTS]
+- Your output MUST have EXACTLY two parts separated by ${DIVIDER}:
+	1. Your thinking (markdown format)
+	2. Action to execute (VALID JSON format ONLY)
+- The JSON part MUST be valid JSON and MUST follow the exact schema provided above
+- DO NOT include any text after the JSON
+- DO NOT wrap the JSON in code blocks or markdown formatting
+- The JSON must be the last thing in your response
 
 [Output Example]
 **User Needs**
@@ -87,21 +90,21 @@ ${DIVIDER}
 
 {
   "type": "call_tools",
-  "tasks": [
+  "actions": [
     {
       "tool_name": "weather_query",
-      "summary": "Query Beijing weather"，
-			"input": {
-				"city": "Beijing",
-				"date": "tomorrow"
-			}
+      "summary": "Query Beijing weather",
+      "input": {
+        "city": "Beijing",
+        "date": "tomorrow"
+      }
     },
     {
       "tool_name": "web_search",
       "summary": "Search for popular fashion information",
-			"input": {
-				"query": "popular fashion in Beijing"
-			}
+      "input": {
+        "query": "popular fashion in Beijing"
+      }
     }
   ]
 }

@@ -13,7 +13,13 @@ export function parseLlmResultWithDivider<T>(
   result: string,
   jsonSchema: z.ZodSchema<T>,
 ) {
-  const [text, json] = result.split(DIVIDER);
+  const parts = result.split(DIVIDER);
+  if (parts.length < 2) {
+    throw new Error(
+      `Expected exactly 2 parts separated by ${DIVIDER}, but got ${parts.length} parts`,
+    );
+  }
+  const [text, json] = parts;
   return [text.trim(), jsonSchema.parse(betterJsonParse(json))] as const;
 }
 
