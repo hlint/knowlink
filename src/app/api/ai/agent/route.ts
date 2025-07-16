@@ -28,12 +28,17 @@ export async function POST(request: NextRequest) {
   try {
     const { markStart, markStop, refShouldAbort } =
       createAgentRequestController(id);
+    const handleContextUpdate = throttle(
+      { interval: 500, trailing: true },
+      (context: Context, textWriter: (text: string) => void) => {
+        contextLogWriter(context);
+        textWriter(JSON.stringify(context));
+      },
+    );
     return generateSseResponse(async (textWriter) => {
       await markStart();
-      const logContext = await createContextLogWriter();
       const contextManager = new ContextManager(context, (context) => {
-        textWriter(JSON.stringify(context));
-        logContext(context);
+        handleContextUpdate(context, textWriter);
         if (refShouldAbort.current) {
           aiAgent.abort();
         }
@@ -66,19 +71,10 @@ export async function DELETE(request: NextRequest) {
   });
   return new Response("OK");
 }
-async function createContextLogWriter() {
+async function contextLogWriter(context: Context) {
   const logFile = `./runtime/logs/ai-agent/${new Date().getTime()}.json`;
   await fs.ensureFile(logFile);
-  const logContext = throttle(
-    {
-      interval: 1000,
-      trailing: true,
-    },
-    (context: Context) => {
-      fs.writeFile(logFile, JSON.stringify(context, null, 2));
-    },
-  );
-  return logContext;
+  fs.writeFile(logFile, JSON.stringify(context, null, 2));
 }
 
 function createAgentRequestController(requestId = shortId()) {
