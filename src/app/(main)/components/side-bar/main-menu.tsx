@@ -79,7 +79,7 @@ export function MainMenu() {
                   title: "About Knowlink",
                   body: (
                     <div>
-                      <p>Version: 0.1.3</p>
+                      <p>Version: 0.1.4</p>
                       <p>
                         Website:{" "}
                         <a
