@@ -7,7 +7,7 @@ import { env } from "./env.server";
 import { type SessionPayload, SessionPayloadSchema } from "./session.define";
 
 const COOKIE_NAME = "app_session";
-const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+const getExpiresAt = () => new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
 
 function getEncodedKey() {
   const secretKey = env().SESSION_SECRET;
@@ -19,7 +19,7 @@ async function encrypt(payload: SessionPayload) {
   return new SignJWT(SessionPayloadSchema.parse(payload))
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
-    .setExpirationTime(expiresAt)
+    .setExpirationTime(getExpiresAt())
     .sign(getEncodedKey());
 }
 
@@ -47,7 +47,7 @@ export async function updateSession(payload: Partial<SessionPayload> = {}) {
   cookieStore.set(COOKIE_NAME, session, {
     httpOnly: true,
     // secure: true,
-    expires: expiresAt,
+    expires: getExpiresAt(),
     sameSite: "lax",
     path: "/",
   });
