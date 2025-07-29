@@ -21,7 +21,7 @@ export default function ModalCreateNote() {
           {subcategoryName ? (
             <DialogDescription>
               Create a new note in{" "}
-              <span className="font-semibold">subcategoryName</span>
+              <span className="font-semibold">{subcategoryName}</span>
             </DialogDescription>
           ) : (
             <DialogDescription>
