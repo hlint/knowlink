@@ -13,6 +13,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { useIsMobile } from "@/hooks/use-mobile";
 import {
@@ -28,6 +29,7 @@ export function MainMenu() {
   const isMobile = useIsMobile();
   const navigate = useProgressNavigate();
   const modalAlert = useAlert();
+  const { setOpenMobile } = useSidebar();
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -49,6 +51,7 @@ export function MainMenu() {
             <DropdownMenuItem
               className="gap-2 p-2"
               onClick={() => {
+                setOpenMobile(false);
                 navigate("/settings");
               }}
             >
@@ -57,6 +60,7 @@ export function MainMenu() {
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => {
+                setOpenMobile(false);
                 navigate("/account");
               }}
               className="gap-2 p-2"
@@ -65,7 +69,10 @@ export function MainMenu() {
               Account
             </DropdownMenuItem>
             <DropdownMenuItem
-              onClick={() => actionLogout()}
+              onClick={() => {
+                setOpenMobile(false);
+                actionLogout();
+              }}
               className="gap-2 p-2"
             >
               <LogOutIcon className="size-4" />
@@ -79,7 +86,7 @@ export function MainMenu() {
                   title: "About Knowlink",
                   body: (
                     <div>
-                      <p>Version: 0.1.4</p>
+                      <p>Version: 0.1.5</p>
                       <p>
                         Website:{" "}
                         <a

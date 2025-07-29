@@ -5,15 +5,21 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { ClockIcon, InboxIcon, NotebookIcon, TrashIcon } from "lucide-react";
 
 export function QuickAccessItems() {
   const pageType = useMainLayoutStore((s) => s.pageType);
+  const { setOpenMobile } = useSidebar();
   return (
     <SidebarMenu>
       <SidebarMenuItem>
-        <SidebarMenuButton isActive={pageType === "recent-notes"} asChild>
+        <SidebarMenuButton
+          isActive={pageType === "recent-notes"}
+          asChild
+          onClick={() => setOpenMobile(false)}
+        >
           <ProgressBarLink href="/quick-access/recent-notes">
             <ClockIcon />
             <span>Recent</span>
@@ -21,7 +27,11 @@ export function QuickAccessItems() {
         </SidebarMenuButton>
       </SidebarMenuItem>
       <SidebarMenuItem>
-        <SidebarMenuButton isActive={pageType === "unsorted-notes"} asChild>
+        <SidebarMenuButton
+          isActive={pageType === "unsorted-notes"}
+          asChild
+          onClick={() => setOpenMobile(false)}
+        >
           <ProgressBarLink href="/quick-access/unsorted-notes">
             <InboxIcon />
             <span>Unsorted</span>
@@ -29,7 +39,11 @@ export function QuickAccessItems() {
         </SidebarMenuButton>
       </SidebarMenuItem>
       <SidebarMenuItem>
-        <SidebarMenuButton isActive={pageType === "all-notes"} asChild>
+        <SidebarMenuButton
+          isActive={pageType === "all-notes"}
+          asChild
+          onClick={() => setOpenMobile(false)}
+        >
           <ProgressBarLink href="/quick-access/all-notes">
             <NotebookIcon />
             <span>All Notes</span>
@@ -37,7 +51,11 @@ export function QuickAccessItems() {
         </SidebarMenuButton>
       </SidebarMenuItem>
       <SidebarMenuItem>
-        <SidebarMenuButton isActive={pageType === "recycle-bin"} asChild>
+        <SidebarMenuButton
+          isActive={pageType === "recycle-bin"}
+          asChild
+          onClick={() => setOpenMobile(false)}
+        >
           <ProgressBarLink href="/quick-access/recycle-bin">
             <TrashIcon />
             <span>Recycle Bin</span>

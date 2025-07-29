@@ -5,6 +5,7 @@ import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
 import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import useUrlBuilder from "@/hooks/use-url-builder";
 import type { Subcategory } from "@prisma/client";
@@ -20,6 +21,7 @@ export default function SubcategoryItem({
   const urlBuilder = useUrlBuilder();
   const [isRenaming, setIsRenaming] = useState(false);
   const [isMoving, setIsMoving] = useState(false);
+  const { setOpenMobile } = useSidebar();
   const label = (
     <ContextMenu>
       <ContextMenuTrigger>
@@ -37,6 +39,7 @@ export default function SubcategoryItem({
               setIsRenaming(true);
             }
           }}
+          onClick={() => setOpenMobile(false)}
         >
           <ProgressBarLink
             href={urlBuilder(`/sub/${subcategory.id}`, {
