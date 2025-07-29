@@ -57,7 +57,7 @@ export function NavMain() {
                 autoFocus: true,
               },
             }).then((value) => {
-              const keywords = value?.trim();
+              const keywords = (value || "").trim();
               if (keywords) {
                 setOpenMobile(false);
                 navigate(
