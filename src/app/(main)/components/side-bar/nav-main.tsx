@@ -1,13 +1,23 @@
 "use client";
 import { useMainLayoutStore } from "@/app/(main)/(pages)/(layout)/store";
-import { ProgressBarLink } from "@/components/advance/progress-bar";
+import { usePrompt } from "@/components/advance/alert-provider";
+import {
+  ProgressBarLink,
+  useProgressNavigate,
+} from "@/components/advance/progress-bar";
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { CalendarIcon, HomeIcon, PencilIcon, PlusIcon } from "lucide-react";
+import {
+  CalendarIcon,
+  HomeIcon,
+  PencilIcon,
+  PlusIcon,
+  SearchIcon,
+} from "lucide-react";
 import { useModalCreateNoteStore } from "../modal-create-note/store";
 
 export function NavMain() {
@@ -16,6 +26,8 @@ export function NavMain() {
   const { openModalCreateNote } = useModalCreateNoteStore(
     (state) => state.actions,
   );
+  const prompt = usePrompt();
+  const navigate = useProgressNavigate();
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -28,6 +40,36 @@ export function NavMain() {
             <HomeIcon />
             <span>Home</span>
           </ProgressBarLink>
+        </SidebarMenuButton>
+      </SidebarMenuItem>
+      <SidebarMenuItem>
+        <SidebarMenuButton
+          onClick={() => {
+            prompt({
+              title: "Search",
+              body: "Search for a note by keywords",
+              actionButton: "Search",
+              actionButtonVariant: "default",
+              cancelButton: "Cancel",
+              cancelButtonVariant: "outline",
+              inputProps: {
+                placeholder: "Keywords...",
+                autoFocus: true,
+              },
+            }).then((value) => {
+              const keywords = value?.trim();
+              if (keywords) {
+                setOpenMobile(false);
+                navigate(
+                  `/quick-access/all-notes?query=${encodeURIComponent(keywords)}`,
+                );
+              }
+            });
+          }}
+          className="w-full"
+        >
+          <SearchIcon />
+          <span>Search</span>
         </SidebarMenuButton>
       </SidebarMenuItem>
       <SidebarMenuItem>
