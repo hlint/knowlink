@@ -1,5 +1,5 @@
-import { defaultInstructions } from "@/app/(main)/(pages)/settings/default_instructions";
-import { fetcherGetAiInstructions } from "@/app/(main)/fetchers/configs";
+import { defaultAssistantPrompt } from "@/app/(main)/(pages)/settings/default-assistant-prompt";
+import { fetcherGetAssistantPrompt } from "@/app/(main)/fetchers/configs";
 import { appTools } from "@/app/(main)/lib/ai-actions/tools";
 import { AiAgent } from "@/lib/ai-agent/ai-agent";
 import { ContextManager } from "@/lib/ai-agent/context-manager";
@@ -29,21 +29,21 @@ export async function POST(request: NextRequest) {
     const { markStart, markStop, refShouldAbort } =
       createAgentRequestController(id);
     const handleContextUpdate = throttle(
-      { interval: 500, trailing: true },
-      (context: Context, textWriter: (text: string) => void) => {
+      { interval: 300, trailing: true },
+      (context: Context) => {
         contextLogWriter(context);
-        textWriter(JSON.stringify(context));
       },
     );
     return generateSseResponse(async (textWriter) => {
       await markStart();
       const contextManager = new ContextManager(context, (context) => {
-        handleContextUpdate(context, textWriter);
+        textWriter(JSON.stringify(context));
+        handleContextUpdate(context);
         if (refShouldAbort.current) {
           aiAgent.abort();
         }
       });
-      const savedInstructions = await fetcherGetAiInstructions();
+      const savedAssistantPrompt = await fetcherGetAssistantPrompt();
       const aiAgent = new AiAgent({
         contextManager,
         tools: [
@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
         ],
         additionalThinkingInstructions:
           configs?.type === "app"
-            ? savedInstructions.trim() || defaultInstructions
+            ? savedAssistantPrompt.trim() || defaultAssistantPrompt
             : "",
       });
       await aiAgent.process();

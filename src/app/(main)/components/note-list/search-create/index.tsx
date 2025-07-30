@@ -3,7 +3,7 @@
 import ButtonCreateNote from "../../modal-create-note/button";
 import ButtonClearSearch from "./button-clear-search";
 import InputSearchWarp from "./input-search-warp";
-import { StoreProvider, useStore } from "./store";
+import { Provider, useContext } from "./store";
 
 export default function SearchCreate(props: {
   subcategoryId: string | null;
@@ -11,17 +11,17 @@ export default function SearchCreate(props: {
   searchOnly?: boolean;
 }) {
   return (
-    <StoreProvider {...props}>
+    <Provider {...props}>
       <div className="flex flex-row items-center gap-4 w-full">
         <InputSearchWarp />
         <Actions />
       </div>
-    </StoreProvider>
+    </Provider>
   );
 }
 
 function Actions() {
-  const { searchOnly, subcategoryId, subcategoryName } = useStore((s) => s);
+  const { searchOnly, subcategoryId, subcategoryName } = useContext();
   return (
     <div className="flex items-center gap-4">
       <ButtonClearSearch />

@@ -1,6 +1,6 @@
 import path from "node:path";
-import fs from "fs-extra";
 import { format } from "date-fns";
+import fs from "fs-extra";
 import { type NextRequest, NextResponse } from "next/server";
 
 export async function GET(_request: NextRequest) {

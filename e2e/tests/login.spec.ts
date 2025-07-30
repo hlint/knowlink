@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 import { login } from "./utils";
 
 test("login with wrong credentials", async ({ page }) => {

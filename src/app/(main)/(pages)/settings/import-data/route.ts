@@ -1,8 +1,8 @@
 import path from "node:path";
 import { checkUserAdmin } from "@/dal-server-action";
 import fs from "fs-extra";
-import { type NextRequest, NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
+import { type NextRequest, NextResponse } from "next/server";
 
 const MAX_FILE_SIZE = 1024 * 1024 * 32; // 32MB
 

@@ -1,52 +1,93 @@
 "use client";
-import { Textarea } from "@/components/ui/textarea";
+import EditorCodemirror from "@/integrations/markdown/editor-codemirror";
 import { debounce } from "radashi";
 import { useState } from "react";
-import { actionSetAiInstructionsContent } from "./actions";
+import { actionSetAssistantPrompt, actionSetWritingPrompt } from "./actions";
 import { useSettingsContext } from "./context";
-import { defaultInstructions } from "./default_instructions";
+import { defaultAssistantPrompt } from "./default-assistant-prompt";
+import { defaultWritingPrompt } from "./default-writing-prompt";
 
-const handleSave = debounce({ delay: 200 }, async (content: string) => {
-  await actionSetAiInstructionsContent(content);
-});
+const handleSaveAssistantPrompt = debounce(
+  { delay: 200 },
+  async (content: string) => {
+    await actionSetAssistantPrompt(content);
+  },
+);
+
+const handleSaveWritingPrompt = debounce(
+  { delay: 200 },
+  async (content: string) => {
+    await actionSetWritingPrompt(content);
+  },
+);
 
 export default function TabAiInstruction() {
-  const { aiInstructions } = useSettingsContext();
-  const [instructions, setInstructions] = useState(aiInstructions);
+  const { assistantPrompt, writingPrompt } = useSettingsContext();
+  const [assistantPromptState, setAssistantPrompt] = useState(assistantPrompt);
+  const [writingPromptState, setWritingPrompt] = useState(writingPrompt);
   return (
     <div className="flex flex-1 flex-col gap-4 p-4 max-w-screen-lg">
       <div className="prose prose-sm max-w-none">
+        <h2>Assistant Prompt</h2>
         <p>
-          This is the additional AI instructions for the AI agent. You can edit
-          the instructions here.
+          Customize the AI agent's behavior by editing the prompt below. This
+          prompt will be used to guide the AI's responses and actions.
         </p>
         <p>
-          Don't know how to start? Click{" "}
+          Need help getting started? Click{" "}
           <button
             type="button"
             className="text-blue-500 hover:underline cursor-pointer"
             onClick={() => {
-              setInstructions(defaultInstructions);
-              handleSave(defaultInstructions);
+              setAssistantPrompt(defaultAssistantPrompt);
+              handleSaveAssistantPrompt(defaultAssistantPrompt);
             }}
           >
             here
           </button>{" "}
-          to load the built-in instructions.
+          to load the default prompt template.
         </p>
-      </div>
-      <div className="flex flex-col gap-2">
-        <Textarea
-          value={instructions}
-          onChange={(e) => {
-            setInstructions(e.target.value);
-            handleSave(e.target.value);
-          }}
-          minRows={6}
-          maxRows={20}
-          className="resize-none"
-          placeholder="Enter your AI instructions here..."
-        />
+        <div className="max-h-[500px] overflow-y-auto">
+          <EditorCodemirror
+            value={assistantPromptState}
+            onChange={(content) => {
+              setAssistantPrompt(content);
+              handleSaveAssistantPrompt(content);
+            }}
+            enableAiEnhancer
+          />
+        </div>
+        <hr />
+        <h2>Writing Prompt</h2>
+        <p>
+          Configure the AI writing assistant's style and approach by editing the
+          prompt below. This prompt will influence how the AI generates and
+          improves your content.
+        </p>
+        <p>
+          Need help getting started? Click{" "}
+          <button
+            type="button"
+            className="text-blue-500 hover:underline cursor-pointer"
+            onClick={() => {
+              setWritingPrompt(defaultWritingPrompt);
+              handleSaveWritingPrompt(defaultWritingPrompt);
+            }}
+          >
+            here
+          </button>{" "}
+          to load the default prompt template.
+        </p>
+        <div className="max-h-[500px] overflow-y-auto">
+          <EditorCodemirror
+            value={writingPromptState}
+            onChange={(content) => {
+              setWritingPrompt(content);
+              handleSaveWritingPrompt(content);
+            }}
+            enableAiEnhancer
+          />
+        </div>
       </div>
     </div>
   );

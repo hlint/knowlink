@@ -1,4 +1,4 @@
-import { createZustandStore } from "@/lib/create-store";
+import { createZustandStore } from "@/lib/create-zustand-store";
 import type { Note } from "@prisma/client";
 import type { Category } from "@prisma/client";
 import type { Subcategory } from "@prisma/client";

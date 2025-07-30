@@ -40,19 +40,10 @@ export function createZustandStoreProvider<T extends object, U extends object>(
 ) {
   const Context = createContext({} as Store<T, U>);
 
-  const StoreProvider = ({
-    children,
-    ...values
-  }: Partial<Omit<T, "children">> & { children: React.ReactNode }) => {
+  const StoreProvider = ({ children }: { children: React.ReactNode }) => {
     const refStore = useRef(
-      createZustandStore(
-        { ...initialState, ...values },
-        additionalStateCreator,
-      ),
+      createZustandStore(initialState, additionalStateCreator),
     );
-    refStore.current.setState((d) => {
-      Object.assign(d, values);
-    });
     return (
       <Context.Provider value={refStore.current}>{children}</Context.Provider>
     );
