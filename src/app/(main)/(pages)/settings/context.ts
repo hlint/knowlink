@@ -3,6 +3,7 @@ import type { Configs } from "../../schema/configs";
 
 export const { Provider: SettingsProvider, useContext: useSettingsContext } =
   createReactContextProvider({
-    aiInstructions: "",
+    assistantPrompt: "",
+    writingPrompt: "",
     configs: {} as Configs,
   });

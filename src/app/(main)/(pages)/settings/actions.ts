@@ -9,9 +9,16 @@ import { actionSetEntryByName } from "../../actions/miscs";
 import { getFavicon } from "../../lib/note-process";
 import { type Configs, ConfigsSchema } from "../../schema/configs";
 
-export async function actionSetAiInstructionsContent(content: string) {
+export async function actionSetAssistantPrompt(content: string) {
   await checkUserAdmin();
-  await actionSetEntryByName("ai_instructions", content);
+  await actionSetEntryByName("assistant_prompt", content);
+  revalidatePath("/");
+}
+
+export async function actionSetWritingPrompt(content: string) {
+  await checkUserAdmin();
+  await actionSetEntryByName("writing_prompt", content);
+  revalidatePath("/");
 }
 
 export async function actionImportBookmarks(fileString: string) {

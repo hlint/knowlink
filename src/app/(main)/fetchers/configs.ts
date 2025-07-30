@@ -6,9 +6,14 @@ import {
 } from "../schema/configs";
 import { fetcherGetEntryByName } from "./miscs";
 
-export async function fetcherGetAiInstructions() {
-  const aiInstructions = await fetcherGetEntryByName("ai_instructions");
-  return aiInstructions?.content ?? "";
+export async function fetcherGetAssistantPrompt() {
+  const assistantPrompt = await fetcherGetEntryByName("assistant_prompt");
+  return assistantPrompt?.content ?? "";
+}
+
+export async function fetcherGetWritingPrompt() {
+  const writingPrompt = await fetcherGetEntryByName("writing_prompt");
+  return writingPrompt?.content ?? "";
 }
 
 export async function fetcherGetConfigs() {

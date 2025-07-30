@@ -1,6 +1,6 @@
 import { uploadFileByUrl } from "@/app/actions";
 import { saveFile } from "@/integrations/file-storage";
-import aiDocSummary from "@/lib/ai-doc-summary";
+import aiDocWriting from "@/lib/ai-doc-writing";
 import { callLlm } from "@/lib/llm/llm";
 import parseFavicon from "@/lib/parse-favicon";
 import { parseBasics } from "@/lib/parse-html";
@@ -69,7 +69,7 @@ export async function getContentFromHtml(html: string) {
   const markdown = parseMarkdown(html);
   data.title = title;
   data.content = `\n> ${description}\n${markdown}\n`;
-  let body = await aiDocSummary({
+  let body = await aiDocWriting({
     doc: html,
   });
   if (body.startsWith("```")) {
@@ -93,7 +93,7 @@ export async function getContentFromDoc(doc: string) {
     title: "",
     content: "",
   };
-  let body = await aiDocSummary({
+  let body = await aiDocWriting({
     doc,
   });
   if (body.startsWith("```")) {

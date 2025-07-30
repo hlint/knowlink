@@ -10,15 +10,21 @@ import TabServices from "./tab-services";
 import useSettingsLayoutEffect from "./use-layout-effect";
 
 export default function SettingsPageClient({
-  aiInstructions,
+  assistantPrompt,
+  writingPrompt,
   configs,
 }: {
-  aiInstructions: string;
+  assistantPrompt: string;
+  writingPrompt: string;
   configs: Configs;
 }) {
   useSettingsLayoutEffect();
   return (
-    <SettingsProvider aiInstructions={aiInstructions} configs={configs}>
+    <SettingsProvider
+      assistantPrompt={assistantPrompt}
+      writingPrompt={writingPrompt}
+      configs={configs}
+    >
       <Tabs defaultValue="tab-1" className="">
         <TabsList className="gap-1 bg-transparent [&_svg]:hidden sm:[&_svg]:block">
           <TabButton value="tab-1">
