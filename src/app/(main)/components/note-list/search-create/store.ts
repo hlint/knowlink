@@ -1,4 +1,4 @@
-import { createZustandStoreProvider } from "@/lib/create-store";
+import createReactContextProvider from "@/lib/create-react-context-provider";
 
 const initialState: {
   subcategoryId: string | null;
@@ -10,11 +10,5 @@ const initialState: {
   searchOnly: false,
 };
 
-export const { useStore, StoreProvider } = createZustandStoreProvider(
-  initialState,
-  () => {
-    return {
-      actions: {},
-    };
-  },
-);
+export const { Provider, useContext } =
+  createReactContextProvider(initialState);

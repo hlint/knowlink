@@ -3,7 +3,7 @@ import {
   actionMoveNotes,
 } from "@/app/(main)/actions/note-list";
 import type { NoteLite } from "@/app/(main)/schema/note";
-import { createZustandStore } from "@/lib/create-store";
+import { createZustandStore } from "@/lib/create-zustand-store";
 import type { Category, Note } from "@prisma/client";
 import type { Subcategory } from "@prisma/client";
 import { debounce } from "radashi";

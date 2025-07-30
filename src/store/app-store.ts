@@ -1,4 +1,4 @@
-import { createZustandStore } from "@/lib/create-store";
+import { createZustandStore } from "@/lib/create-zustand-store";
 
 type AppStore = {
   placeholder: string;

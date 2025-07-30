@@ -29,16 +29,16 @@ export async function POST(request: NextRequest) {
     const { markStart, markStop, refShouldAbort } =
       createAgentRequestController(id);
     const handleContextUpdate = throttle(
-      { interval: 500, trailing: true },
-      (context: Context, textWriter: (text: string) => void) => {
+      { interval: 300, trailing: true },
+      (context: Context) => {
         contextLogWriter(context);
-        textWriter(JSON.stringify(context));
       },
     );
     return generateSseResponse(async (textWriter) => {
       await markStart();
       const contextManager = new ContextManager(context, (context) => {
-        handleContextUpdate(context, textWriter);
+        textWriter(JSON.stringify(context));
+        handleContextUpdate(context);
         if (refShouldAbort.current) {
           aiAgent.abort();
         }

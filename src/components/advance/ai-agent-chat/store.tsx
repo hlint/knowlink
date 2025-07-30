@@ -1,5 +1,5 @@
 import { type Context, ContextSchema } from "@/lib/ai-agent/types/context";
-import { createZustandStoreProvider } from "@/lib/create-store";
+import { createZustandStoreProvider } from "@/lib/create-zustand-store";
 import fetchEventSource from "@/lib/fetch-event-source";
 import { shortId } from "@/lib/string";
 
@@ -33,6 +33,7 @@ const initialState: ChatStore = {
 export const { StoreProvider, useStore: useChatStore } =
   createZustandStoreProvider(initialState, (set, get) => ({
     actions: {
+      set,
       setInput: (input: string) => {
         set((d) => {
           d.input = input;
