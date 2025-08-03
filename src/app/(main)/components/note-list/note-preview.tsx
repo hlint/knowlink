@@ -34,7 +34,7 @@ export default function NotePreview() {
         <>
           <div className="flex flex-col gap-4 mb-4">
             <CategoryNav subcategoryId={note.subcategoryId} />
-            <NoteIllustration title={note.title} />
+            <NoteIllustration note={note} />
             <h1 className="text-2xl font-bold line-clamp-2">{note.title}</h1>
             {note.link ? (
               <a
