@@ -12,6 +12,7 @@ type MainLayoutStore = {
     | "unsorted-notes"
     | "recent-notes"
     | "recycle-bin"
+    | "pinned-notes"
     | "event-calendar"
     | "settings"
     | "account";

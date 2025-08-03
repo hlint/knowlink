@@ -11,6 +11,7 @@ export async function actionUpdateNote({
   link,
   subcategoryId,
   confidential,
+  pinned,
   content,
   icon,
   deleted,
@@ -22,6 +23,7 @@ export async function actionUpdateNote({
   link?: string;
   subcategoryId?: string;
   confidential?: boolean;
+  pinned?: boolean;
   content?: string;
   icon?: string;
   deleted?: boolean;
@@ -64,6 +66,7 @@ export async function actionUpdateNote({
       link,
       subcategoryId,
       confidential,
+      pinned,
       content,
       icon,
       deleted,

@@ -43,6 +43,7 @@ model Note {
   viewedCount   Int           @default(0)
   confidential  Boolean       @default(false)
   deleted       Boolean       @default(false)
+  pinned        Boolean       @default(false)
   deletedAt     DateTime?
   subcategoryId String?
   createdAt     DateTime      @default(now())

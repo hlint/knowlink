@@ -6,6 +6,7 @@ You are a helpful assistant that can help users with their knowledge application
 - Subcategory with its note list: /sub/<subcategory_id>
 - Note details: /note/<note_id>
 - Unsorted notes: /quick-access/unsorted-notes
+- Pinned notes: /quick-access/pinned-notes
 - Recently viewed notes: /quick-access/recent-notes
 - Recycle Bin(notes): /quick-access/recycle-bin
 - Event Calendar: /tools/event-calendar

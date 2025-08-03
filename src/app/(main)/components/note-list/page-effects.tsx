@@ -1,7 +1,13 @@
 "use client";
 import { useNoteListStore } from "@/app/(main)/components/note-list/note-list-store";
 import type { Category, Subcategory } from "@prisma/client";
-import { ClockIcon, InboxIcon, NotebookIcon, TrashIcon } from "lucide-react";
+import {
+  ClockIcon,
+  InboxIcon,
+  NotebookIcon,
+  PinIcon,
+  TrashIcon,
+} from "lucide-react";
 import { useLayoutEffect } from "react";
 import { useMainLayoutStore } from "../../(pages)/(layout)/store";
 import type { NoteLite } from "../../schema/note";
@@ -11,7 +17,8 @@ export type PageType =
   | "unsorted-notes"
   | "recent-notes"
   | "recycle-bin"
-  | "all-notes";
+  | "all-notes"
+  | "pinned-notes";
 
 export function NoteListEffect({
   category,
@@ -68,6 +75,7 @@ export function NoteListEffect({
                       "recent-notes": "Recent Notes",
                       "recycle-bin": "Recycle Bin",
                       "all-notes": "All Notes",
+                      "pinned-notes": "Pinned Notes",
                     } as const
                   )[pageType],
                   icon: (
@@ -76,6 +84,7 @@ export function NoteListEffect({
                       "recent-notes": <ClockIcon className="size-4" />,
                       "recycle-bin": <TrashIcon className="size-4" />,
                       "all-notes": <NotebookIcon className="size-4" />,
+                      "pinned-notes": <PinIcon className="size-4" />,
                     } as const
                   )[pageType],
                 },

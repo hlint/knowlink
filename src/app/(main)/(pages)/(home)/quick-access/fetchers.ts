@@ -14,10 +14,12 @@ export async function fetcherGetQuickAccessItemsCounts() {
       subcategoryId: true,
       deleted: true,
       updatedAt: true,
+      pinned: true,
     },
   });
   const counts = {
     all: 0,
+    pinned: 0,
     unsorted: 0,
     recent: 0,
     recycle: 0,
@@ -31,6 +33,10 @@ export async function fetcherGetQuickAccessItemsCounts() {
   for (const note of notes) {
     if (note.deleted) {
       counts.recycle++;
+      continue;
+    }
+    if (note.pinned) {
+      counts.pinned++;
       continue;
     }
     if (!note.subcategoryId) {
