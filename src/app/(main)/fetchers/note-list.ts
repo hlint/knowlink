@@ -4,6 +4,19 @@ import Fuse from "fuse.js";
 import { omit } from "radashi";
 import type { NoteLite } from "../schema/note";
 
+const noteSelect = {
+  id: true,
+  title: true,
+  icon: true,
+  link: true,
+  content: true,
+  subcategoryId: true,
+  pending: true,
+  pinned: true,
+  deleted: true,
+  confidential: true,
+};
+
 export async function fetcherGetNoteDetails(noteIds: string[]) {
   const notes = await prisma.note.findMany({
     where: { id: { in: noteIds }, confidential: false, deleted: false },
@@ -34,6 +47,7 @@ export async function fetcherGetNotesBySearchForAi({
       title: true,
       link: true,
       content: true,
+      pinned: true,
       subcategory: {
         select: {
           id: true,
@@ -53,17 +67,7 @@ export async function fetcherGetAllNotes(query = "") {
     where: {
       deleted: false,
     },
-    select: {
-      id: true,
-      title: true,
-      icon: true,
-      link: true,
-      content: true,
-      subcategoryId: true,
-      pending: true,
-      deleted: true,
-      confidential: true,
-    },
+    select: noteSelect,
     orderBy: {
       updatedAt: "desc",
     },
@@ -80,19 +84,23 @@ export async function fetcherGetNotesBySubcategoryId(
       deleted: false,
       subcategoryId,
     },
-    select: {
-      id: true,
-      title: true,
-      icon: true,
-      link: true,
-      content: true,
-      subcategoryId: true,
-      pending: true,
-      deleted: true,
-      confidential: true,
-    },
+    select: noteSelect,
     orderBy: {
       title: "asc",
+    },
+  });
+  return fuseSearch(notes, query);
+}
+
+export async function fetcherGetPinnedNotes(query = "") {
+  const notes = await prisma.note.findMany({
+    where: {
+      deleted: false,
+      pinned: true,
+    },
+    select: noteSelect,
+    orderBy: {
+      updatedAt: "desc",
     },
   });
   return fuseSearch(notes, query);
@@ -106,17 +114,7 @@ export async function fetcherGetRecentlyViewedNotes(query = "") {
         gt: subDays(new Date(), 3),
       },
     },
-    select: {
-      id: true,
-      title: true,
-      icon: true,
-      link: true,
-      content: true,
-      subcategoryId: true,
-      pending: true,
-      deleted: true,
-      confidential: true,
-    },
+    select: noteSelect,
     orderBy: {
       updatedAt: "desc",
     },
@@ -130,17 +128,7 @@ export async function fetcherGetUnclassifiedNotes(query = "") {
       deleted: false,
       subcategoryId: null,
     },
-    select: {
-      id: true,
-      title: true,
-      icon: true,
-      link: true,
-      content: true,
-      subcategoryId: true,
-      pending: true,
-      deleted: true,
-      confidential: true,
-    },
+    select: noteSelect,
     orderBy: {
       title: "asc",
     },
@@ -153,17 +141,7 @@ export async function fetcherGetRecycleBinNotes(query = "") {
     where: {
       deleted: true,
     },
-    select: {
-      id: true,
-      title: true,
-      icon: true,
-      link: true,
-      content: true,
-      subcategoryId: true,
-      pending: true,
-      deleted: true,
-      confidential: true,
-    },
+    select: noteSelect,
     orderBy: {
       deletedAt: "desc",
     },

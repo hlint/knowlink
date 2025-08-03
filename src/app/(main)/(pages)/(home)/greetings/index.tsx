@@ -50,8 +50,8 @@ function GoodTime({ username }: { username: string }) {
     };
     if (hour < 5) return messages.night;
     if (hour < 12) return messages.morning;
-    if (hour < 16) return messages.afternoon;
-    if (hour < 20) return messages.evening;
+    if (hour < 17) return messages.afternoon;
+    if (hour < 21) return messages.evening;
     return messages.night;
   }, [hour]);
   return (

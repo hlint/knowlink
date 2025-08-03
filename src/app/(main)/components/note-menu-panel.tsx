@@ -26,6 +26,7 @@ export default function NoteMenuPanel({
   const idInputLink = useId();
   const idInputSubcategory = useId();
   const idInputPrivate = useId();
+  const idInputPinned = useId();
   const [pulling, setPulling] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [cloning, setCloning] = useState(false);
@@ -63,6 +64,19 @@ export default function NoteMenuPanel({
       </div>
       <div className="flex max-w-sm items-center gap-1.5">
         <Switch
+          id={idInputPinned}
+          defaultChecked={note.pinned}
+          onCheckedChange={(checked) => {
+            actionUpdateNoteDebounced({
+              id: note.id,
+              pinned: checked,
+            });
+          }}
+        />
+        <Label htmlFor={idInputPinned}>Pinned</Label>
+      </div>
+      <div className="flex max-w-sm items-center gap-1.5">
+        <Switch
           id={idInputPrivate}
           defaultChecked={note.confidential}
           onCheckedChange={(checked) => {
@@ -73,7 +87,8 @@ export default function NoteMenuPanel({
           }}
         />
         <Label htmlFor={idInputPrivate}>Private (No AI access)</Label>
-      </div>{" "}
+      </div>
+
       <div className="flex flex-row gap-2">
         {note.link && (
           <Tooltip delayDuration={500}>

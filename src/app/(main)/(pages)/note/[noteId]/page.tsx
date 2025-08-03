@@ -54,14 +54,14 @@ export default async function NotePage({
               <NotePending
                 note={note}
                 illustrationComponent={
-                  <NoteIllustration title={note.title} className="sm:px-18" />
+                  <NoteIllustration note={note} className="sm:px-18" />
                 }
               />
             ) : (
               <NoteEditor
                 note={note}
                 illustrationComponent={
-                  <NoteIllustration title={note.title} className="sm:px-18" />
+                  <NoteIllustration note={note} className="sm:px-18" />
                 }
               />
             )}

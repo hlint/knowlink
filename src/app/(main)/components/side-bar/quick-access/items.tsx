@@ -7,13 +7,31 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { ClockIcon, InboxIcon, NotebookIcon, TrashIcon } from "lucide-react";
+import {
+  ClockIcon,
+  InboxIcon,
+  NotebookIcon,
+  PinIcon,
+  TrashIcon,
+} from "lucide-react";
 
 export function QuickAccessItems() {
   const pageType = useMainLayoutStore((s) => s.pageType);
   const { setOpenMobile } = useSidebar();
   return (
     <SidebarMenu>
+      <SidebarMenuItem>
+        <SidebarMenuButton
+          isActive={pageType === "pinned-notes"}
+          asChild
+          onClick={() => setOpenMobile(false)}
+        >
+          <ProgressBarLink href="/quick-access/pinned-notes">
+            <PinIcon />
+            <span>Pinned</span>
+          </ProgressBarLink>
+        </SidebarMenuButton>
+      </SidebarMenuItem>
       <SidebarMenuItem>
         <SidebarMenuButton
           isActive={pageType === "recent-notes"}

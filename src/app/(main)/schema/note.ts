@@ -9,5 +9,6 @@ export type NoteLite = Pick<
   | "subcategoryId"
   | "pending"
   | "deleted"
+  | "pinned"
   | "confidential"
 >;

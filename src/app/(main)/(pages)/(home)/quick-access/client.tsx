@@ -6,7 +6,7 @@ import {
   FolderIcon,
   InboxIcon,
   NotebookIcon,
-  TrashIcon,
+  PinIcon,
 } from "lucide-react";
 import CountUp from "react-countup";
 import type { QuickAccessCounts } from "./fetchers";
@@ -33,6 +33,18 @@ export default function QuickAccessClient({
       </CardHeader>
       <CardContent className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4">
         <QuickAccessItem
+          title="All Notes"
+          icon={<NotebookIcon />}
+          count={counts.all}
+          href="/quick-access/all-notes"
+        />
+        <QuickAccessItem
+          title="Pinned"
+          icon={<PinIcon />}
+          count={counts.pinned}
+          href="/quick-access/pinned-notes"
+        />
+        <QuickAccessItem
           title="Recent"
           icon={<ClockIcon />}
           count={counts.recent}
@@ -43,18 +55,6 @@ export default function QuickAccessClient({
           icon={<InboxIcon />}
           count={counts.unsorted}
           href="/quick-access/unsorted-notes"
-        />
-        <QuickAccessItem
-          title="All Notes"
-          icon={<NotebookIcon />}
-          count={counts.all}
-          href="/quick-access/all-notes"
-        />
-        <QuickAccessItem
-          title="Recycle"
-          icon={<TrashIcon />}
-          count={counts.recycle}
-          href="/quick-access/recycle-bin"
         />
       </CardContent>
     </Card>
