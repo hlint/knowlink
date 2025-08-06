@@ -1,5 +1,5 @@
-import { uploadFileByUrl } from "@/app/actions";
 import * as cheerio from "cheerio";
+import { uploadFileByUrl } from "./file.server";
 import { Queue } from "./queue";
 import { fixRelativeLinks } from "./string";
 

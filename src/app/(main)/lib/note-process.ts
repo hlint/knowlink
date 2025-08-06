@@ -1,6 +1,6 @@
-import { uploadFileByUrl } from "@/app/actions";
 import { saveFile } from "@/integrations/file-storage";
 import aiDocWriting from "@/lib/ai-doc-writing";
+import { uploadFileByUrl } from "@/lib/file.server";
 import { callLlm } from "@/lib/llm/llm";
 import parseFavicon from "@/lib/parse-favicon";
 import { parseBasics } from "@/lib/parse-html";

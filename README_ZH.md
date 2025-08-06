@@ -30,7 +30,7 @@
 
 ## 关于项目
 
-![mockup](./docs/public/mockup.png)
+![demo](./docs/public/demo.gif)
 
 Knowlink 旨在成为您的个人知识管理解决方案：
 
