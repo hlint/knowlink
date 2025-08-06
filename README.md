@@ -30,7 +30,7 @@
 
 ## About The Project
 
-![mockup](./docs/public/mockup.png)
+![demo](./docs/public/demo.gif)
 
 Knowlink is designed to be your personal knowledge management solution:
 

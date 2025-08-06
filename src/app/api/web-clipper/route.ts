@@ -9,6 +9,17 @@ import type { Note } from "@prisma/client";
 import { type NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
+const headers = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+};
+
+// For CORS
+export async function OPTIONS(_request: NextRequest) {
+  return NextResponse.json({ message: "OK" }, { headers, status: 200 });
+}
+
 // check if the note is already created
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -24,12 +35,15 @@ export async function GET(request: NextRequest) {
   if (!result.success) {
     return NextResponse.json(
       { error: "Invalid request data", details: result.error.errors },
-      { status: 400 },
+      { status: 400, headers },
     );
   }
   const { url, access_key } = result.data;
   if (access_key !== (await fetcherGetConfig("webClipperAccessKey"))) {
-    return NextResponse.json({ error: "Invalid access key" }, { status: 401 });
+    return NextResponse.json(
+      { error: "Invalid access key" },
+      { status: 401, headers },
+    );
   }
   const note = await prisma.note.findFirst({
     where: {
@@ -38,9 +52,12 @@ export async function GET(request: NextRequest) {
     },
   });
   if (note) {
-    return NextResponse.json({ isExisting: true, noteId: note.id });
+    return NextResponse.json(
+      { isExisting: true, noteId: note.id },
+      { headers },
+    );
   }
-  return NextResponse.json({ isExisting: false });
+  return NextResponse.json({ isExisting: false }, { headers });
 }
 
 // create note
@@ -56,12 +73,15 @@ export async function POST(request: NextRequest) {
   if (!result.success) {
     return NextResponse.json(
       { error: "Invalid request data", details: result.error.errors },
-      { status: 400 },
+      { status: 400, headers },
     );
   }
   const { url, access_key, html: htmlProvided } = result.data;
   if (access_key !== (await fetcherGetConfig("webClipperAccessKey"))) {
-    return NextResponse.json({ error: "Invalid access key" }, { status: 401 });
+    return NextResponse.json(
+      { error: "Invalid access key" },
+      { status: 401, headers },
+    );
   }
   const html = await scrapeHtml(url, {
     providedHtml: htmlProvided,
@@ -117,5 +137,5 @@ export async function POST(request: NextRequest) {
       data: { pending: false },
     });
   });
-  return NextResponse.json({ id });
+  return NextResponse.json({ id }, { headers });
 }
