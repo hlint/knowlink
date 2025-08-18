@@ -1,6 +1,6 @@
 {
   "name": "knowlink",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "private": true,
   "scripts": {
     "bootstrap": "bun ./scripts/bootstrap.ts",
@@ -128,7 +128,7 @@
     "react-error-boundary": "^6.0.0",
     "react-hook-form": "^7.56.1",
     "react-i18next": "^15.5.1",
-    "react-in-viewport": "^1.0.0-beta.8",
+    "react-intersection-observer": "^9.16.0",
     "react-markdown": "^10.1.0",
     "react-resizable-panels": "^2.1.8",
     "react-textarea-autosize": "^8.5.9",
