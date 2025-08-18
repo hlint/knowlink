@@ -39,6 +39,8 @@ export default function NotePreview() {
             {note.link ? (
               <a
                 href={note.link}
+                target="_blank"
+                rel="noreferrer"
                 className="text-primary underline-offset-4 hover:underline line-clamp-2 break-all"
               >
                 {note.link}
