@@ -40,9 +40,18 @@ export function createZustandStoreProvider<T extends object, U extends object>(
 ) {
   const Context = createContext({} as Store<T, U>);
 
-  const StoreProvider = ({ children }: { children: React.ReactNode }) => {
+  const StoreProvider = ({
+    children,
+    overrideInitialState,
+  }: {
+    children: React.ReactNode;
+    overrideInitialState?: Partial<T>;
+  }) => {
     const refStore = useRef(
-      createZustandStore(initialState, additionalStateCreator),
+      createZustandStore(
+        { ...initialState, ...overrideInitialState },
+        additionalStateCreator,
+      ),
     );
     return (
       <Context.Provider value={refStore.current}>{children}</Context.Provider>

@@ -16,9 +16,11 @@ interface NoteProps {
 export default function NoteIcon({
   note,
   className,
+  hideLocked,
 }: {
   note: NoteProps;
   className?: string;
+  hideLocked?: boolean;
 }) {
   const { imgLoaded, tried } = useTryLoadImage(note.icon || "");
   return (
@@ -30,7 +32,7 @@ export default function NoteIcon({
           <Fallback note={note} />
         )
       ) : null}
-      {note.confidential && <MarkLocked />}
+      {note.confidential && !hideLocked && <MarkLocked />}
     </div>
   );
 }

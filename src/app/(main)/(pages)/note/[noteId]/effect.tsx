@@ -50,7 +50,7 @@ export function NoteEffect({
     if (note) {
       breadcrumbItems.push({
         name: note.title || "Untitled",
-        icon: <NoteIcon note={note} className="size-4 rounded-sm" />,
+        icon: <NoteIcon note={note} className="size-4 rounded-sm" hideLocked />,
       });
     }
     setMainLayoutValues({
