@@ -1,9 +1,9 @@
 "use client";
 
-import Illustration from "@/app/(main)/components/illustration";
 import ClientOnly from "@/components/advance/client-only";
 import { Skeleton } from "@/components/ui/skeleton";
 import useRootLayout from "@/hooks/use-root-layout";
+import Image from "next/image";
 import { useMemo } from "react";
 import img_afternoon from "./img_afternoon.jpg";
 import img_evening from "./img_evening.jpg";
@@ -56,7 +56,14 @@ function GoodTime({ username }: { username: string }) {
   }, [hour]);
   return (
     <div className="relative overflow-hidden rounded-md">
-      <Illustration name={`${message.text1}-${message.text2}`} />
+      <Image
+        src={message.image}
+        alt={message.text1}
+        width={1600}
+        height={400}
+        quality={100}
+        className="rounded-md w-full"
+      />
       <div className="absolute bottom-0 left-0 right-0 space-y-1 bg-gradient-to-t from-black/80 to-transparent p-4">
         <h3 className="text-2xl font-semibold text-white truncate">
           {message.text1}, {username}

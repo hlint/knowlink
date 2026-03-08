@@ -1,4 +1,3 @@
-import NoteIllustration from "@/app/(main)/components/note-illustration";
 import Toc from "@/components/advance/toc";
 import { prisma } from "@/lib/prisma";
 import type { Metadata } from "next";
@@ -51,19 +50,9 @@ export default async function NotePage({
         {note ? (
           <>
             {note.pending ? (
-              <NotePending
-                note={note}
-                illustrationComponent={
-                  <NoteIllustration note={note} className="sm:px-18" />
-                }
-              />
+              <NotePending note={note} />
             ) : (
-              <NoteEditor
-                note={note}
-                illustrationComponent={
-                  <NoteIllustration note={note} className="sm:px-18" />
-                }
-              />
+              <NoteEditor note={note} />
             )}
             <Toc
               className="pr-[100px] w-[380px]"

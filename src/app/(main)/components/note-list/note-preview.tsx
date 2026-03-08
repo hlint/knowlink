@@ -14,7 +14,6 @@ import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { useMemo } from "react";
 import { useMainLayoutStore } from "../../(pages)/(layout)/store";
-import NoteIllustration from "../note-illustration";
 
 export default function NotePreview() {
   const note = useNoteListStore((s) => s.previewNote);
@@ -34,7 +33,6 @@ export default function NotePreview() {
         <>
           <div className="flex flex-col gap-4 mb-4">
             <CategoryNav subcategoryId={note.subcategoryId} />
-            <NoteIllustration note={note} />
             <h1 className="text-2xl font-bold line-clamp-2">{note.title}</h1>
             {note.link ? (
               <a

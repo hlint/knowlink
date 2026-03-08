@@ -12,11 +12,5 @@ export default async function PinnedNotesPage({
 }) {
   const { query } = await searchParams;
   const notes = await fetcherGetPinnedNotes(query);
-  return (
-    <ListPageContent
-      notes={notes}
-      pageType="pinned-notes"
-      illustrationName="Important documents pinned to a cork board with colorful thumbtacks"
-    />
-  );
+  return <ListPageContent notes={notes} pageType="pinned-notes" />;
 }

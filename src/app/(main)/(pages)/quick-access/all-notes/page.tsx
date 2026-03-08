@@ -12,11 +12,5 @@ export default async function UnclassifiedNotesPage({
 }) {
   const { query } = await searchParams;
   const notes = await fetcherGetAllNotes(query);
-  return (
-    <ListPageContent
-      notes={notes}
-      pageType="all-notes"
-      illustrationName="Bookshelf, books neatly arranged within"
-    />
-  );
+  return <ListPageContent notes={notes} pageType="all-notes" />;
 }

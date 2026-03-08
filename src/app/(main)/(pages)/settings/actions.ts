@@ -90,13 +90,9 @@ export async function actionCleanUpload() {
   const noteVersions = await prisma.noteVersion.findMany({
     select: { content: true },
   });
-  const illustrations = await prisma.illustration.findMany({
-    select: { src: true },
-  });
   const content = [
     ...notes.map((note) => [note.icon, note.content].join("\n")),
     ...noteVersions.map((v) => v.content),
-    ...illustrations.map((i) => i.src),
   ].join("\n");
   const unusedFiles = files.filter((file) => !content.includes(file.key));
   for (const file of unusedFiles) {

@@ -14,7 +14,7 @@ import type { Note } from "@prisma/client";
 import { useUpdateEffect } from "ahooks";
 import { CodeIcon } from "lucide-react";
 import { debounce } from "radashi";
-import { type ReactNode, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { actionUpdateNote } from "../../../actions/note";
 import NoteInfo from "./note-info";
@@ -27,13 +27,9 @@ const actionUpdateNoteDebounced = debounce(
   actionUpdateNote,
 );
 
-export default function NoteEditor({
-  note,
-  illustrationComponent,
-}: { note: Note; illustrationComponent: ReactNode }) {
+export default function NoteEditor({ note }: { note: Note }) {
   return (
     <div className="note-body flex w-full max-w-screen-lg flex-1 flex-col gap-0 p-4">
-      {illustrationComponent}
       <MetaEditor note={note} />
       <NoteInfo note={note} />
       <ContentEditor note={note} />

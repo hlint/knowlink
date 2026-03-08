@@ -2,14 +2,11 @@
 import { actionCheckNoteReady } from "@/app/(main)/actions/note";
 import MarkdownPreview from "@/integrations/markdown/markdown-preview";
 import type { Note } from "@prisma/client";
-import { type ReactNode, useEffect } from "react";
+import { useEffect } from "react";
 import NoteMoreForm from "../../../components/note-more-form";
 import NoteInfo from "./note-info";
 
-export default function NotePending({
-  note,
-  illustrationComponent,
-}: { note: Note; illustrationComponent: ReactNode }) {
+export default function NotePending({ note }: { note: Note }) {
   useEffect(() => {
     const interval = setInterval(() => {
       if (note.pending) {
@@ -20,7 +17,6 @@ export default function NotePending({
   }, [note.id, note.pending]);
   return (
     <div className="note-body flex w-full max-w-screen-lg flex-1 flex-col gap-4 p-4 animate-pulse">
-      {illustrationComponent}
       <MetaPreview note={note} />
       <NoteInfo note={note} />
       <MarkdownPreview text={note.content} className="sm:px-20 sm:py-4" />

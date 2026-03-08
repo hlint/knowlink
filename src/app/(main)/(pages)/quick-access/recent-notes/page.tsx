@@ -12,11 +12,5 @@ export default async function RecentlyViewedPage({
 }) {
   const { query } = await searchParams;
   const notes = await fetcherGetRecentlyViewedNotes(query);
-  return (
-    <ListPageContent
-      notes={notes}
-      pageType="recent-notes"
-      illustrationName="A collection of documents neatly arranged on a desk"
-    />
-  );
+  return <ListPageContent notes={notes} pageType="recent-notes" />;
 }

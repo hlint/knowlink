@@ -12,11 +12,5 @@ export default async function RecycleBinPage({
 }) {
   const { query } = await searchParams;
   const notes = await fetcherGetRecycleBinNotes(query);
-  return (
-    <ListPageContent
-      notes={notes}
-      pageType="recycle-bin"
-      illustrationName="Recycling bin in the office"
-    />
-  );
+  return <ListPageContent notes={notes} pageType="recycle-bin" />;
 }

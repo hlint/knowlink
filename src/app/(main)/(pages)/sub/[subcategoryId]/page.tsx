@@ -33,7 +33,6 @@ export default async function SubcategoryPage({
       subcategory={subcategory ? omit(subcategory, ["category"]) : null}
       category={subcategory?.category ?? null}
       fallback={subcategory ? undefined : <NotFound />}
-      illustrationName={`Category: ${subcategory?.category?.name} / ${subcategory?.name}`}
     />
   );
 }
