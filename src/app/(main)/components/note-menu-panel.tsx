@@ -136,6 +136,7 @@ export default function NoteMenuPanel({
         <Button
           size="sm"
           className="ml-auto"
+          title="Delete note"
           variant={deleting ? "destructive" : "ghost"}
           disabled={deleting}
           onClick={() => {

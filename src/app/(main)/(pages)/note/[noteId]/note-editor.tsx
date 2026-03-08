@@ -125,6 +125,7 @@ function MetaEditor({ note }: { note: Note }) {
           <Button
             size="iconSm"
             variant={codeMode ? "default" : "ghost"}
+            title={codeMode ? "Switch to Markdown mode" : "Switch to Code mode"}
             onClick={() => {
               setValues({
                 codeMode: !codeMode,

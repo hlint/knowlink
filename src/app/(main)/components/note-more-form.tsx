@@ -29,6 +29,7 @@ export default function NoteMoreForm({
         <PopoverTrigger asChild>
           <Button
             size="iconSm"
+            title="More options"
             variant="ghost"
             className={cn("", className)}
             onClick={(e) => {
